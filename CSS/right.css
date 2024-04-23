@@ -1,0 +1,45 @@
+body {
+    height: 95%;
+    font-family: Times New Roman, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+td {
+    font-size: 15px;
+    padding: 1px;
+}
+
+#prodInfo {
+    font-family: Times New Roman, sans-serif;
+    margin-top: 5px;
+    margin-left: 25%;
+    width: 50%;
+}
+
+#prodInfo td {
+    background-color: rgba(77, 173, 194, 0.381);
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.centered-message {
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; */
+    text-align: center;
+}
+
+img {
+    border: none;
+}
+
+.product-image {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Store</title>
+    <link rel="stylesheet" href="CSS/index.css" type="text/css">
+    <script src="JS/display.js"></script>
+    <link rel="icon" type="image/x-icon" href="Icon/Icon.png">
+
+    <script>
+        function hideCartByDefault() {
+            var cart = document.getElementById('bottom');
+            cart.style.display = 'none';
+        }
+
+        function initTreeMenu() {
+            var treeItems = document.querySelectorAll('.has-children');
+            treeItems.forEach(function(treeItem) {
+                treeItem.addEventListener('click', function(event) {
+                    if (event.currentTarget === event.target) {
+                        treeItem.classList.toggle('open');
+                        event.stopPropagation();
+                    }
+                });
+            });
+        }
+        window.onload = function() {
+            initTreeMenu();
+            hideCartByDefault();
+            setDefaultProductId();
+        };
+
+        function toggleCart() {
+            var cart = document.getElementById('bottom');
+            var button = document.getElementById('cart-toggle-btn');
+
+            if (cart.style.display === 'none') {
+                cart.style.display = 'block';
+                button.textContent = 'Hide Cart';
+            } else {
+                cart.style.display = 'none';
+                button.textContent = 'Show Cart';
+            }
+        }
+
+        function setDefaultProductId() {
+            var iframe = document.getElementById('right-frame');
+            var urlString = iframe.getAttribute('src');
+            if (!urlString.includes('id=')) {
+                iframe.setAttribute('src', 'right.php?id=NULL');
+            }
+        }
+    </script>
+    <base target="right-frame">
+</head>
+
+<div id="top-bar">
+    <div id="global-icon">
+        <img src="Icon/Icon.png" alt="Grocery Store Icon" />
+    </div>
+
+    <h1 id="site-title">Smart Shopping System</h1>
+</div>
+
+<div id="left">
+    <div id="search-container">
+        <form action="search.php" method="get" target="right-frame">
+            <input type="text" id="search-box" name="search" placeholder="Search for products..." />
+            <button id="search-btn" type="submit" onclick="searchProducts()">🔍</button>
+        </form>
+    </div>
+    <div id="list-container" class="scrollable-list">
+        <ul>
+            <li class="has-children">Frozen Food>
+                <ul>
+                    <li class="has-children">Sea Food>
+                        <ul>
+                            <li><a href="right.php?id=1000">Fish Fingers(500 Gram)</a></li>
+                            <li><a href="right.php?id=1001">Fish Fingers(1000 Gram)</a></li>
+                            <li><a href="right.php?id=1003">Shelled Prawns</a></li>
+                    </li>
+                    </ul>
+                    <li class="has-children">Milk Products>
+                        <ul>
+                            <li><a href="right.php?id=1004">Tub Ice Cream(1.80)></a></li>
+                            <li><a href="right.php?id=1005">Tub Ice Cream(3.40)></a></li>
+                    </li>
+                    </ul>
+                </ul>
+                <li class="has-children">Other>
+                    <ul>
+                        <li><a href="right.php?id=1002">Hamburger Patties></a></li>
+                        <li><a href="right.php?id=4005">Chocolate Bar></a></li>
+                    </ul>
+                </li>
+                <li class="has-children">Fresh Food>
+                    <ul>
+                        <li class="has-children">Cheese>
+                            <ul>
+                                <li><a href="right.php?id=3000">Cheddar Cheese(500 Gram)></a></li>
+                                <li><a href="right.php?id=3001">Cheddar Cheese(1000 Gram)></a></li>
+                        </li>
+                        </ul>
+                        <li><a href="right.php?id=3002">T Bone Steak</a></li>
+                        <li><a href="right.php?id=3003">Navel Oranges</a></li>
+                        <li><a href="right.php?id=3004">Bananas</a></li>
+                        <li><a href="right.php?id=3005">Peaches</a></li>
+                        <li><a href="right.php?id=3006">Grapes</a></li>
+                        <li><a href="right.php?id=3007">Apples</a></li>
+                </li>
+                </ul>
+                <li class="has-children">Beverages>
+                    <ul>
+                        <li class="has-children">Tea Bags>
+                            <ul>
+                                <li><a href="right.php?id=4000">Earl Grey Tea Bags(Pack 25)</a></li>
+                                <li><a href="right.php?id=4001">Earl Grey Tea Bags(Pack 100)</a></li>
+                                <li><a href="right.php?id=4002">Earl Grey Tea Bags(Pack 200)</a></li>
+                        </li>
+                        </ul>
+                        <li class="has-children">Instant Coffee>
+                            <ul>
+                                <li><a href="right.php?id=4003">Instant Coffee(200 gram)</a></li>
+                                <li><a href="right.php?id=4004">Instant Coffee(500 gram)</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-children">Home Health>
+                    <ul>
+                        <li class="has-children">Panadol>
+                            <ul>
+                                <li><a href="right.php?id=2000">Panadol (Pack 24)</a></li>
+                                <li><a href="right.php?id=2001">Panadol (Bottle 50)</a></li>
+                            </ul>
+                        </li>
+                        <li class="has-children">Garbage Bags>
+                            <ul>
+                                <li><a href="right.php?id=2003">Garbage Bags Small</a></li>
+                                <li><a href="right.php?id=2004">Garbage Bags Large</a></li>
+                            </ul>
+                        </li class="has-children">
+                        <li><a href="right.php?id=2002">Bath Soap</a></li>
+                        <li><a href="right.php?id=2005">Washing Powder</a></li>
+                        <li><a href="right.php?id=2006">Laundry Bleach</a></li>
+                    </ul>
+                </li>
+                <li class="has-children">Pet Food>
+                    <ul>
+                        <li class="has-children">Dog Food>
+                            <ul>
+                                <li><a href="right.php?id=5000">Dry Dog Food (5 kg Pack)</a></li>
+                                <li><a href="right.php?id=5001">Dry Dog Food (1 kg Pack)</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="right.php?id=5002">Bird Food</a></li>
+                        <li><a href="right.php?id=5003">Cat Food</a></li>
+                        <li><a href="right.php?id=5004">Fish Food</a></li>
+                    </ul>
+                </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<div id="right">
+    <button id="cart-toggle-btn" onclick="toggleCart()">Show Cart</button>
+    <iframe id="right-frame" src="right.php" name="right-frame" scrolling="no"></iframe>
+</div>
+<div id="bottom">
+    <iframe id="bottom-frame" src="cart.php" name="bottom-frame"></iframe>
+</div>
+
+</body>
+
+</html>
